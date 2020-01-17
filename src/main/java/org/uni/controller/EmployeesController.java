@@ -123,10 +123,14 @@ public class EmployeesController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<Employee> deleteEmployee(@PathVariable String id) {
+    public ResponseEntity<EmployeeDeleted> deleteEmployee(@PathVariable String id) {
+
+        String message = EmployeesApplication.formatMessage("Successfully deleted the employee.");
         try {
             employeeService.deleteEmployee(Integer.parseInt(id));
-            return new ResponseEntity<>(HttpStatus.OK);
+            EmployeeDeleted Employee = new EmployeeDeleted(message);
+            return new ResponseEntity((Employee.getMessage()), HttpStatus.OK);
+
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -170,5 +174,17 @@ class EmployeeEdited {
 
     public String getLocation() {
         return location;
+    }
+}
+
+class EmployeeDeleted {
+    private String message;
+
+    public EmployeeDeleted(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

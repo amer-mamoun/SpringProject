@@ -155,10 +155,12 @@ public class DepartmentsController {
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResponseEntity<Department> deleteDepartment(@PathVariable String id) {
+    public ResponseEntity<DepartmentDeleted> deleteDepartment(@PathVariable String id) {
+        String message = EmployeesApplication.formatMessage("Successfully deleted the department.");
         try {
             departmentService.deleteDepartment(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+            DepartmentDeleted Department = new DepartmentDeleted(message);
+            return new ResponseEntity((Department.getMessage()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -201,3 +203,16 @@ public class DepartmentsController {
             return location;
         }
     }
+
+
+class DepartmentDeleted {
+    private String message;
+
+    public DepartmentDeleted(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}

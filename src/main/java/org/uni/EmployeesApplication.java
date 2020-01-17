@@ -17,5 +17,8 @@ public class EmployeesApplication {
     public static String formatEditLocation(String requestURL) {
         return String.format("%s", requestURL);
     }
+    public static String formatMessage(String message) {
+        return String.format("%s", message);
+    }
 
 }
