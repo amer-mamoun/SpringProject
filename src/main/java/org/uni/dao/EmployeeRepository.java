@@ -1,4 +1,4 @@
-package org.uni.hibernate;
+package org.uni.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
@@ -12,6 +12,6 @@ import java.util.List;
 @Transactional
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>, CrudRepository<Employee, Integer> {
 
-    public List<Employee> findByFirstName(String firstName);
+    List<Employee> findByFirstName(String firstName);
 
 }

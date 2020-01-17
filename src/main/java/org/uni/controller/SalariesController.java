@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.uni.model.Salary;
-import org.uni.service.SalaryService;
+import org.uni.services.SalaryService;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class SalariesController {
     @Autowired
     SalaryService salaryService;
 
-    @RequestMapping(value = "/employees/{id}/salaries", method = RequestMethod.GET)
+    @RequestMapping(value = {"/employees/get/{id}/salaries"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Salary>> getSalariesById(@PathVariable(value = "id") String id) {
         try {

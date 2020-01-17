@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.uni.EmployeesApplication;
 import org.uni.model.Employee;
-import org.uni.service.EmployeeService;
+import org.uni.services.EmployeeService;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping(value = {"/employees"})
 public class EmployeesController {
 
     private static final String DEFAULT_RESULT_LIMIT = "50";
@@ -27,7 +27,7 @@ public class EmployeesController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = "/get/all",method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/all"},method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Employee>> getEmployees(
             @RequestParam(defaultValue = DEFAULT_RESULT_LIMIT, required = false) String limit
@@ -40,7 +40,7 @@ public class EmployeesController {
         }
     }
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/{id}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") String id) {
         Employee employee = employeeService.getEmployeeById(Integer.parseInt(id));
@@ -53,7 +53,7 @@ public class EmployeesController {
     }
 
 
-    @RequestMapping(value = "/get/fname/{firstName}", method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/fname/{firstName}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Employee>> getEmployeesByFirstName(@PathVariable(value = "firstName") String name) {
         List<Employee> employee = employeeService.findByFirstName(name);
@@ -66,7 +66,7 @@ public class EmployeesController {
    }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/add"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<EmployeeCreated> addEmployee(
             HttpServletRequest httpServletRequest,
@@ -95,7 +95,7 @@ public class EmployeesController {
 
 
 
-    @RequestMapping(value = "/edit/{id}",method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = {"/edit/{id}"},method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<EmployeeEdited> editEmployee(
             HttpServletRequest httpServletRequest,
@@ -121,7 +121,7 @@ public class EmployeesController {
         }
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/delete/{id}"}, method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<EmployeeDeleted> deleteEmployee(@PathVariable String id) {
 

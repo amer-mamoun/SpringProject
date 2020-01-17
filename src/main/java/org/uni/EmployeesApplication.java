@@ -12,12 +12,15 @@ public class EmployeesApplication {
     }
 
     public static String formatAddLocation(String requestURL, String id) {
+
         return String.format("%s/%s", requestURL, id);
     }
     public static String formatEditLocation(String requestURL) {
+
         return String.format("%s", requestURL);
     }
     public static String formatMessage(String message) {
+
         return String.format("%s", message);
     }
 

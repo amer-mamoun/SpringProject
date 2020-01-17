@@ -11,8 +11,7 @@ import org.uni.EmployeesApplication;
 import org.uni.model.Department;
 import org.uni.model.DepartmentEmployee;
 import org.uni.model.DepartmentManager;
-import org.uni.model.Employee;
-import org.uni.service.DepartmentService;
+import org.uni.services.DepartmentService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
@@ -20,7 +19,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping(value = {"/departments"})
 public class DepartmentsController {
 
     private final static String DEFAULT_RESULT_LIMIT = "50";
@@ -28,7 +27,7 @@ public class DepartmentsController {
     @Autowired
     private DepartmentService departmentService;
 
-    @RequestMapping(value = "/get/all", method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/all"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Department>> getDepartments(
             @RequestParam(defaultValue = DEFAULT_RESULT_LIMIT, required = false) String limit
@@ -46,7 +45,7 @@ public class DepartmentsController {
     }
 
 
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/{id}"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Department> getDepartmentById(@PathVariable String id) {
 
@@ -62,7 +61,7 @@ public class DepartmentsController {
     }
 
 
-    @RequestMapping(value = "/get/{id}/employees", method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/{id}/employees"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<DepartmentEmployee>> getDepartmentEmployeesById(@PathVariable String id) {
 
@@ -79,7 +78,7 @@ public class DepartmentsController {
     }
 
 
-    @RequestMapping(value = "/get/{id}/managers", method = RequestMethod.GET)
+    @RequestMapping(value = {"/get/{id}/managers"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<DepartmentManager>> getDepartmentManagersById(@PathVariable String id) {
 
@@ -96,7 +95,7 @@ public class DepartmentsController {
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = {"/add"}, method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<DepartmentCreated> addDepartment(
             HttpServletRequest httpServletRequest,
@@ -124,7 +123,7 @@ public class DepartmentsController {
         }
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = {"/edit/{id}"}, method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<DepartmentEdited> editDepartment(
             HttpServletRequest httpServletRequest,
@@ -153,7 +152,7 @@ public class DepartmentsController {
         }
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/delete/{id}"}, method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<DepartmentDeleted> deleteDepartment(@PathVariable String id) {
         String message = EmployeesApplication.formatMessage("Successfully deleted the department.");

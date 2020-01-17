@@ -1,19 +1,20 @@
-package org.uni.service;
+package org.uni.services.serviceImpl;
 
-import com.fasterxml.jackson.databind.util.EmptyIterator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import org.uni.hibernate.EmployeeRepository;
+import org.uni.dao.EmployeeRepository;
 import org.uni.model.Employee;
+import org.uni.services.EmployeeService;
 
 import java.util.List;
 
-@Service
-public class EmployeeService {
-    @Autowired
+
+public class EmployeeServiceImpl implements EmployeeService {
+
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository){
+        this.employeeRepository = employeeRepository;
+    }
+
     private EmployeeRepository employeeRepository;
 
     public List<Employee> getEmployees(int limit) {
@@ -43,6 +44,6 @@ public class EmployeeService {
 
     public void deleteEmployee(int employeeNumber) {
 
-        employeeRepository.delete(employeeNumber);
+        employeeRepository.deleteById(employeeNumber);
     }
 }

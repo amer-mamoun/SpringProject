@@ -1,23 +1,25 @@
-package org.uni.service;
+package org.uni.services.serviceImpl;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
-import org.uni.hibernate.DepartmentRepository;
+import org.uni.dao.DepartmentRepository;
 import org.uni.model.Department;
+import org.uni.services.DepartmentService;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
-public class DepartmentService {
+
+public class DepartmentServiceImpl implements DepartmentService {
+
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository){
+        this.departmentRepository = departmentRepository;
+    }
 
     private static final String DEPARTMENT_ID_PREFIX = "d";
 
-    @Autowired
     private DepartmentRepository departmentRepository;
 
     public List<Department> getDepartments(int limit) {
@@ -26,7 +28,7 @@ public class DepartmentService {
     }
 
     public Department getDepartmentById(String id) {
-        return departmentRepository.findOne(id);
+        return departmentRepository.getOne(id);
     }
 
     @Transactional
@@ -54,6 +56,6 @@ public class DepartmentService {
     }
 
     public void deleteDepartment(String id) {
-        departmentRepository.delete(id);
+        departmentRepository.deleteById(id);
     }
 }

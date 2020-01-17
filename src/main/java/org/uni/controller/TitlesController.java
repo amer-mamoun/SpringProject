@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.uni.model.Title;
-import org.uni.service.TitleService;
+import org.uni.services.TitleService;
+
 
 import java.util.List;
 
@@ -13,11 +14,11 @@ import java.util.List;
 public class TitlesController {
 
     @Autowired
-    private TitleService titleService;
+    TitleService titleService;
 
-    @RequestMapping(value = "/employees/{id}/titles", method = RequestMethod.GET)
+    @RequestMapping(value = {"/employees/get/{id}/titles"}, method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<Title>> getTitlesById(@PathVariable(value = "id") String id) {
+    public ResponseEntity<List<Title>> getTitlesByEmployeeNumber(@PathVariable(value = "id") String id) {
         try {
             int employeeNumber = Integer.parseInt(id);
             return new ResponseEntity<>(titleService.getTitlesByEmployeeNumber(employeeNumber), HttpStatus.OK);
