@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "employees")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})  // Ignore lazy-loaded properties
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee implements Serializable {
 
     @Id

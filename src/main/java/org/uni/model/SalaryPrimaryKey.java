@@ -32,15 +32,14 @@ public class SalaryPrimaryKey implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
 
-        SalaryPrimaryKey that = (SalaryPrimaryKey) o;
+        SalaryPrimaryKey that = (SalaryPrimaryKey) obj;
 
         if (employeeNumber != that.employeeNumber) return false;
         return fromDate.equals(that.fromDate);
-
     }
 
     @Override

@@ -46,65 +46,6 @@ public class DepartmentsController {
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public ResponseEntity<DepartmentCreated> addDepartment(
-            HttpServletRequest httpServletRequest,
-            @RequestBody Department department
-    ) {
-        Department newDepartment = departmentService.addDepartment(department);
-
-        if (newDepartment == null) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        try {
-            String newLocation = EmployeesApplication.formatLocation(
-                    httpServletRequest.getRequestURL().toString(),
-                    newDepartment.getDepartmentId());
-            URI uri = new URI(newLocation);
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setLocation(uri);
-            return new ResponseEntity<>(new DepartmentCreated(
-                    newDepartment.getDepartmentId(), newLocation),
-                    httpHeaders,
-                    HttpStatus.CREATED);
-        } catch (URISyntaxException e) {
-            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
-        }
-    }
-
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
-    public ResponseEntity<DepartmentEdited> editDepartment(
-            HttpServletRequest httpServletRequest,
-            @RequestBody Department department,
-            @PathVariable String id
-    ) {
-        Department theDepartment = departmentService.editDepartment(department);
-
-        if (theDepartment == null) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        try {
-            String theLocation = EmployeesApplication.formatLocation(
-                    httpServletRequest.getRequestURL().toString(),
-                    theDepartment.getDepartmentId());
-            URI uri = new URI(theLocation);
-            HttpHeaders httpResponseHeaders = new HttpHeaders();
-            httpResponseHeaders.setLocation(uri);
-
-            return new ResponseEntity(
-                    new DepartmentCreated(theDepartment.getDepartmentId(), theLocation),
-                    httpResponseHeaders,
-                    HttpStatus.ACCEPTED);
-        } catch (URISyntaxException e) {
-            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
-        }
-    }
-
-
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Department> getDepartmentById(@PathVariable String id) {
@@ -155,51 +96,108 @@ public class DepartmentsController {
     }
 
 
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<DepartmentCreated> addDepartment(
+            HttpServletRequest httpServletRequest,
+            @RequestBody Department department
+    ) {
+        Department newDepartment = departmentService.addDepartment(department);
+
+        if (newDepartment == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        try {
+            String newLocation = EmployeesApplication.formatAddLocation(
+                    httpServletRequest.getRequestURL().toString(),
+                    newDepartment.getDepartmentId());
+            URI uri = new URI(newLocation);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(uri);
+            return new ResponseEntity<>(new DepartmentCreated(
+                    newDepartment.getDepartmentId(), newLocation),
+                    httpHeaders,
+                    HttpStatus.CREATED);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<DepartmentEdited> editDepartment(
+            HttpServletRequest httpServletRequest,
+            @RequestBody Department department,
+            @PathVariable String id
+    ) {
+        Department theDepartment = departmentService.editDepartment(department);
+
+        if (theDepartment == null) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        try {
+            String theLocation = EmployeesApplication.formatEditLocation(
+                    httpServletRequest.getRequestURL().toString());
+            URI uri = new URI(theLocation);
+            HttpHeaders httpResponseHeaders = new HttpHeaders();
+            httpResponseHeaders.setLocation(uri);
+
+            return new ResponseEntity(
+                    new DepartmentCreated(theDepartment.getDepartmentId(), theLocation),
+                    httpResponseHeaders,
+                    HttpStatus.ACCEPTED);
+        } catch (URISyntaxException e) {
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity<Department> deleteDepartment(@PathVariable String id) {
         try {
             departmentService.deleteDepartment(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
 
-class DepartmentCreated {
-    private String departmentId;
-    private String location;
+    class DepartmentCreated {
+        private String departmentId;
+        private String location;
 
-    public DepartmentCreated(String departmentId, String location) {
-        this.departmentId = departmentId;
-        this.location = location;
+        public DepartmentCreated(String departmentId, String location) {
+            this.departmentId = departmentId;
+            this.location = location;
+        }
+
+        public String getDepartmentId() {
+            return departmentId;
+        }
+
+        public String getLocation() {
+            return location;
+        }
     }
 
-    public String getDepartmentId() {
-        return departmentId;
+
+    class DepartmentEdited {
+        private String departmentId;
+        private String location;
+
+        public DepartmentEdited(String departmentId, String location) {
+            this.departmentId = departmentId;
+            this.location = location;
+        }
+
+        public String getDepartmentId() {
+            return departmentId;
+        }
+
+        public String getLocation() {
+            return location;
+        }
     }
-
-    public String getLocation() {
-        return location;
-    }
-}
-
-
-class DepartmentEdited {
-    private String departmentId;
-    private String location;
-
-    public DepartmentEdited(String departmentId, String location) {
-        this.departmentId = departmentId;
-        this.location = location;
-    }
-
-    public String getDepartmentId() {
-        return departmentId;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-}

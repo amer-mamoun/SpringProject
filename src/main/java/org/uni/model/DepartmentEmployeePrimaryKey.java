@@ -31,16 +31,15 @@ public class DepartmentEmployeePrimaryKey implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
 
-        DepartmentEmployeePrimaryKey that = (DepartmentEmployeePrimaryKey) o;
+        DepartmentEmployeePrimaryKey that = (DepartmentEmployeePrimaryKey) obj;
 
         if (employeeNumber != that.employeeNumber) return false;
         if (departmentNumber != null ? !departmentNumber.equals(that.departmentNumber) : that.departmentNumber != null)
             return false;
-
         return true;
     }
 

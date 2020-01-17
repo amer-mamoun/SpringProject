@@ -11,8 +11,11 @@ public class EmployeesApplication {
         SpringApplication.run(EmployeesApplication.class, args);
     }
 
-    public static String formatLocation(String requestURL, String id) {
+    public static String formatAddLocation(String requestURL, String id) {
         return String.format("%s/%s", requestURL, id);
+    }
+    public static String formatEditLocation(String requestURL) {
+        return String.format("%s", requestURL);
     }
 
 }

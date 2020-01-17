@@ -74,7 +74,7 @@ public class EmployeesController {
     ) {
         Employee newEmployee = employeeService.addEmployee(employee);
 
-        String newLocation = EmployeesApplication.formatLocation(
+        String newLocation = EmployeesApplication.formatAddLocation(
                 httpServletRequest.getRequestURL().toString(),
                 Integer.toString(newEmployee.getEmployeeNumber()));
         try {
@@ -104,9 +104,8 @@ public class EmployeesController {
             ) {
         Employee theEmployee = employeeService.editEmployee(employee);
 
-        String theLocation = EmployeesApplication.formatLocation(
-                httpServletRequest.getRequestURL().toString(),
-                Integer.toString(theEmployee.getEmployeeNumber()));
+        String theLocation = EmployeesApplication.formatEditLocation(
+                httpServletRequest.getRequestURL().toString());
         try {
             URI uri = new URI(theLocation);
             HttpHeaders httpResponseHeaders = new HttpHeaders();
