@@ -11,7 +11,7 @@ import org.uni.EmployeesApplication;
 import org.uni.model.Department;
 import org.uni.model.DepartmentEmployee;
 import org.uni.model.DepartmentManager;
-import org.uni.services.DepartmentService;
+import org.uni.service.DepartmentService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;

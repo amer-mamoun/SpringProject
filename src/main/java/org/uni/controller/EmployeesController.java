@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.uni.EmployeesApplication;
 import org.uni.model.Employee;
-import org.uni.services.EmployeeService;
+import org.uni.service.EmployeeService;
 
 
 import javax.servlet.http.HttpServletRequest;

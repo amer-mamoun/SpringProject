@@ -1,4 +1,4 @@
-package org.uni.services;
+package org.uni.service;
 
 import org.uni.model.Department;
 

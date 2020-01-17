@@ -1,4 +1,4 @@
-package org.uni.services.serviceImpl;
+package org.uni.service.serviceImpl;
 
 
 import org.springframework.data.domain.PageRequest;
@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.uni.dao.DepartmentRepository;
 import org.uni.model.Department;
-import org.uni.services.DepartmentService;
+import org.uni.service.DepartmentService;
 
 import javax.transaction.Transactional;
 import java.util.List;

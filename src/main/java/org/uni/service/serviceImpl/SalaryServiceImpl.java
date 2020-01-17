@@ -1,9 +1,9 @@
-package org.uni.services.serviceImpl;
+package org.uni.service.serviceImpl;
 
 import org.uni.dao.EmployeeRepository;
 import org.uni.model.Employee;
 import org.uni.model.Salary;
-import org.uni.services.SalaryService;
+import org.uni.service.SalaryService;
 
 import java.util.List;
 

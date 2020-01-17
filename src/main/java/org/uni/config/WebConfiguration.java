@@ -4,14 +4,14 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.uni.dao.DepartmentRepository;
 import org.uni.dao.EmployeeRepository;
-import org.uni.services.DepartmentService;
-import org.uni.services.EmployeeService;
-import org.uni.services.SalaryService;
-import org.uni.services.TitleService;
-import org.uni.services.serviceImpl.DepartmentServiceImpl;
-import org.uni.services.serviceImpl.EmployeeServiceImpl;
-import org.uni.services.serviceImpl.SalaryServiceImpl;
-import org.uni.services.serviceImpl.TitleServiceImpl;
+import org.uni.service.DepartmentService;
+import org.uni.service.EmployeeService;
+import org.uni.service.SalaryService;
+import org.uni.service.TitleService;
+import org.uni.service.serviceImpl.DepartmentServiceImpl;
+import org.uni.service.serviceImpl.EmployeeServiceImpl;
+import org.uni.service.serviceImpl.SalaryServiceImpl;
+import org.uni.service.serviceImpl.TitleServiceImpl;
 
 @SpringBootConfiguration
 public class WebConfiguration {

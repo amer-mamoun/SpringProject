@@ -1,10 +1,10 @@
-package org.uni.services.serviceImpl;
+package org.uni.service.serviceImpl;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.uni.dao.EmployeeRepository;
 import org.uni.model.Employee;
-import org.uni.services.EmployeeService;
+import org.uni.service.EmployeeService;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package org.uni.services.serviceImpl;
+package org.uni.service.serviceImpl;
 
 
 import org.uni.dao.EmployeeRepository;
 import org.uni.model.Employee;
 import org.uni.model.Title;
-import org.uni.services.TitleService;
+import org.uni.service.TitleService;
 
 import java.util.List;
 
